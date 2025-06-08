@@ -29,7 +29,7 @@ const ProductDetailsScreen = () => {
           </View>
 
           <View style={styles.descriptionContainer}>
-            <Text style={styles.descriptionTitle}>About this item</Text>
+            <Text style={styles.bulletText}>About this item</Text>
             {bulletPoints.map((point, index) => (
               <View key={index} style={styles.bulletItem}>
                 <View style={styles.bulletCircle} />
@@ -58,8 +58,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   image: {
-    width: '100%',
-    height: 300,
+    width: "100%",
+    height: 331.6,
   },
   information: {
     flexDirection: 'column',
@@ -79,12 +79,6 @@ const styles = StyleSheet.create({
   descriptionContainer: {
     marginTop: 20,
     marginBottom: 20,
-  },
-  descriptionTitle: {
-    color: '#000000',
-    fontSize: 16,
-    fontWeight: '600',
-    marginBottom: 12,
   },
   bulletItem: {
     flexDirection: 'row',

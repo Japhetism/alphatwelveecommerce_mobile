@@ -17,7 +17,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
   return (
     <TouchableOpacity onPress={() => {
-      console.log("product ", product)
       setSelectedProduct(product)
       navigation.navigate('ProductDetails')
     }}>
