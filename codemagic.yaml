@@ -18,4 +18,4 @@ workflows:
           cd android
           ./gradlew assembleRelease
     artifacts:
-      - android/app/build/outputs/apk/release/app-release-unsigned.apk
+      - android/app/build/outputs/apk/release/app-release.apk
