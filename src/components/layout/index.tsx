@@ -2,10 +2,23 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import AppBar from '../appBar';
 
-const AppLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+type AppLayoutProps = {
+  title: string;
+  showSearch: boolean;
+  children: React.ReactNode;
+}
+
+const AppLayout: React.FC<AppLayoutProps> = ({ 
+  title,
+  showSearch,
+  children
+}) => {
   return (
     <View style={styles.container}>
-      <AppBar />
+      <AppBar
+        title={title}
+        showSearch={showSearch}
+      />
       <View style={styles.content}>{children}</View>
     </View>
   );

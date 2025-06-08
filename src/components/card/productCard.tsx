@@ -1,9 +1,9 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../navigation/appNavigator';
 import { Product } from '../../types';
 import { useProductStore } from '../../store/useProductStore';
-import { RootStackParamList } from '../navigation/appNavigator';
 
 type ProductCardProps = {
   product: Product,

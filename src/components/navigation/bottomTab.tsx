@@ -45,9 +45,11 @@ const BottomTabs = () => {
               icon = (
                 <View>
                   <CartIcon color={focused ? ACTIVE_ICON_COLOR : INACTIVE_ICON_COLOR} size={iconSize} />
-                  <View style={styles.badge}>
-                    <Text style={styles.badgeText}>{uniqueItemCount}</Text>
-                  </View>
+                  {uniqueItemCount > 0 && (
+                    <View style={styles.badge}>
+                      <Text style={styles.badgeText}>{uniqueItemCount}</Text>
+                    </View>
+                  )}
                 </View>
               );
               break;

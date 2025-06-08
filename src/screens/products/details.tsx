@@ -8,7 +8,7 @@ const ProductDetailsScreen = () => {
   const { addToCart } = useCart();
 
   return (
-    <AppLayout>
+    <AppLayout title="Go back" showSearch={false}>
       <View style={styles.container}>
         <ScrollView showsVerticalScrollIndicator={false}>
           <Image

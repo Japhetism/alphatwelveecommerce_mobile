@@ -1,11 +1,14 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import AppLayout from '../../components/layout';
 
 const FavouritesScreen = () => {
   return (
-    <View style={styles.container}>
-      <Text>Favourite Screen</Text>
-    </View>
+    <AppLayout title="Favourite" showSearch={false}>
+      <View style={styles.container}>
+        <Text>Favourite Screen</Text>
+      </View>
+    </AppLayout>
   );
 };
 

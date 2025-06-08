@@ -1,10 +1,22 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity, TextInput } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../navigation/appNavigator';
 import BellIcon from '../../assets/icons/bell';
 import SearchIcon from '../../assets/icons/search';
 import LeftArrowIcon from '../../assets/icons/leftArrow';
 
-const AppBar: React.FC = () => {
+type AppBarProps = {
+  title: string;
+  showSearch: boolean;
+}
+
+type NavigationProp = NativeStackNavigationProp<RootStackParamList>;
+
+const AppBar: React.FC<AppBarProps> = ({ title, showSearch }) => {
+  const navigation = useNavigation<NavigationProp>();
+  
   return (
     <>
       <View style={styles.container}>
@@ -24,20 +36,22 @@ const AppBar: React.FC = () => {
             <BellIcon size={24} color="#000" />
           </TouchableOpacity>
         </View>
-        <View style={styles.searchContainer}>
-          <SearchIcon size={18} color="#888" />
-          <TextInput
-            style={styles.searchInput}
-            placeholder="Search..."
-            placeholderTextColor="#94A3B8"
-          />
-        </View>
+        {showSearch && (
+          <View style={styles.searchContainer}>
+            <SearchIcon size={18} color="#888" />
+            <TextInput
+              style={styles.searchInput}
+              placeholder="Search..."
+              placeholderTextColor="#94A3B8"
+            />
+          </View>
+        )}
       </View>
       <View style={styles.breadcrumb}>
-        <TouchableOpacity onPress={() => {}}>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.goBack()}>
           <LeftArrowIcon color="#64748B" size={14} />
+          <Text style={styles.pageTitle}>{title}</Text>
         </TouchableOpacity>
-        <Text style={styles.pageTitle}>Technology</Text>
       </View>
     </>
   );
@@ -116,5 +130,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderBottomWidth: 1,
     borderBottomColor: '#F5F5F5'
+  },
+  button: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 10,
   }
 });

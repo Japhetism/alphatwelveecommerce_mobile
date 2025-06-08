@@ -12,7 +12,7 @@ const ProductListScreen = () => {
   },[]);
 
   return (
-    <AppLayout>
+    <AppLayout title="Technology" showSearch>
       <View style={styles.container}>
         <FlatList
           data={products}
