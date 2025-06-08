@@ -1,4 +1,5 @@
 import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import Toast from 'react-native-toast-message';
 import AppLayout from "../../components/layout";
 import { useProductStore } from "../../store/useProductStore";
 import { useCart } from "../../context/cart";
@@ -37,7 +38,17 @@ const ProductDetailsScreen = () => {
         </ScrollView>
 
         {selectedProduct && (
-          <TouchableOpacity style={styles.button} onPress={() => addToCart(selectedProduct, 1)}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => {
+              addToCart(selectedProduct, 1)
+              Toast.show({
+                type: 'success',
+                text2: `Item has been added to cart`,
+                position: 'top',
+              });
+            }}
+          >
             <Text style={styles.buttonText}>Add to cart</Text>
           </TouchableOpacity>
         )}
