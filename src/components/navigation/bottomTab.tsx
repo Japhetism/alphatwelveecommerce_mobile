@@ -9,7 +9,7 @@ import UserIcon from '../../assets/icons/user';
 
 import CartScreen from '../../screens/cart';
 import FavouritesScreen from '../../screens/favourites';
-import HomeScreen from '../../screens/Home';
+import ProductListScreen from '../../screens/products/list';
 import ProfileScreen from '../../screens/profile';
 
 const Tab = createBottomTabNavigator();
@@ -66,7 +66,7 @@ const BottomTabs = () => {
         },
       })}
     >
-      <Tab.Screen name="Home" component={HomeScreen} />
+      <Tab.Screen name="Home" component={ProductListScreen} />
       <Tab.Screen name="Cart" component={CartScreen} />
       <Tab.Screen name="Favourites" component={FavouritesScreen} />
       <Tab.Screen name="Profile" component={ProfileScreen} />
