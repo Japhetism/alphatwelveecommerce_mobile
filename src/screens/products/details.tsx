@@ -1,7 +1,7 @@
 import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import AppLayout from "../../components/layout";
 import { useProductStore } from "../../store/useProductStore";
-import { useCart } from "../../hooks/useCart";
+import { useCart } from "../../context/cart";
 
 const ProductDetailsScreen = () => {
   const { selectedProduct } = useProductStore();

@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, useMemo } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { CartItem, Product } from '../types';
 
@@ -73,6 +73,22 @@ export const useCart = () => {
     setCartItems([]);
   }, []);
 
+  const subtotal = useMemo(() => {
+    return cartItems.reduce(
+      (sum, item) => sum + item.product.price * item.quantityOrdered,
+      0
+    );
+  }, [cartItems]);
+
+  // Calculate shipping as 10% of total price
+  const shippingCost = useMemo(() => {
+    return subtotal * 0.1;
+  }, [subtotal]);
+
+  const totalCost = useMemo(() => {
+    return subtotal + shippingCost;
+  }, [subtotal, shippingCost]);
+
   return {
     cartItems,
     addToCart,
@@ -80,5 +96,8 @@ export const useCart = () => {
     updateItemQuantity,
     clearCart,
     loading,
+    subtotal,
+    shippingCost,
+    totalCost,
   };
 };
