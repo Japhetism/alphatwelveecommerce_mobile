@@ -1,11 +1,12 @@
 import React from 'react';
-import Toast, { BaseToastProps } from 'react-native-toast-message';
+import Toast, { ToastConfig } from 'react-native-toast-message';
 import AppNavigator from './src/components/navigation/appNavigator';
 import CustomToast from './src/components/customToast';
 import { CartProvider } from './src/context/cart';
 
-const toastConfig = {
-  success: (props: React.JSX.IntrinsicAttributes & BaseToastProps) => <CustomToast {...props} />,
+const toastConfig: ToastConfig = {
+  success: (props) => <CustomToast {...props} />,
+  error: (props) => <CustomToast {...props} />,
 };
 
 const App = () => {

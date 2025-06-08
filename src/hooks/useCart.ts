@@ -1,4 +1,5 @@
 import { useState, useCallback, useEffect, useMemo } from 'react';
+import Toast from 'react-native-toast-message';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { CartItem, Product } from '../types';
 
@@ -17,6 +18,10 @@ export const useCart = () => {
         }
       } catch (e) {
         console.error('Failed to load cart from storage', e);
+        Toast.show({
+          type: 'error',
+          text2: 'Something went wrong while loading your cart.',
+        });
       } finally {
         setLoading(false);
       }
@@ -26,9 +31,13 @@ export const useCart = () => {
 
   useEffect(() => {
     if (!loading) {
-      AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(cartItems)).catch((e) =>
-        console.error('Failed to save cart to storage', e)
-      );
+      AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(cartItems)).catch((e) => {
+        console.error('Failed to save cart to storage', e);
+        Toast.show({
+          type: 'error',
+          text2: 'Could not save your cart. Try again later.',
+        });
+      });
     }
   }, [cartItems, loading]);
 
@@ -39,6 +48,11 @@ export const useCart = () => {
       );
 
       if (existingItem) {
+        Toast.show({
+          type: 'success',
+          text2: 'Item has been added to cart',
+        });
+
         return prevItems.map((item) =>
           item.product.id === product.id
             ? { ...item, quantityOrdered: item.quantityOrdered + quantity }
@@ -46,9 +60,15 @@ export const useCart = () => {
         );
       }
 
+      Toast.show({
+        type: 'success',
+        text2: 'Item has been added to cart',
+      });
+
       return [...prevItems, { product, quantityOrdered: quantity }];
     });
   }, []);
+
 
   const removeFromCart = useCallback((productId: string) => {
     setCartItems((prevItems) =>

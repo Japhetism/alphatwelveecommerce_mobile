@@ -1,16 +1,21 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
-import { BaseToastProps } from 'react-native-toast-message';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { BaseToastProps, ToastType } from 'react-native-toast-message';
 import SuccessCheckIcon from '../../assets/icons/successcheck';
 import CloseIcon from '../../assets/icons/close';
 
-const CustomToast = ({ text1, text2, onPress }: BaseToastProps) => {
+// Extend props correctly using ToastType
+type CustomToastProps = BaseToastProps & { type: ToastType };
+
+const CustomToast = ({ text1, text2, onPress, type }: CustomToastProps) => {
+  const isError = type === 'error';
+
   return (
-    <View style={styles.container}>
-      <SuccessCheckIcon size={14.5} />
+    <View style={[styles.container, isError && styles.errorContainer]}>
+      {!isError && <SuccessCheckIcon size={14.5} />}
       <View style={styles.textContainer}>
-        {text1 && (<Text style={styles.text1}>{text1}</Text>)}
-        {text2 ? <Text style={styles.text2}>{text2}</Text> : null}
+        {text1 && <Text style={[styles.text1, isError && styles.errorText1]}>{text1}</Text>}
+        {text2 && <Text style={[styles.text2, isError && styles.errorText2]}>{text2}</Text>}
       </View>
       <TouchableOpacity onPress={onPress}>
         <CloseIcon size={10.5} />
@@ -34,6 +39,9 @@ const styles = StyleSheet.create({
     marginTop: 10,
     gap: 10,
   },
+  errorContainer: {
+    borderLeftColor: '#EF4444',
+  },
   textContainer: {
     flex: 1,
   },
@@ -47,5 +55,11 @@ const styles = StyleSheet.create({
     color: '#334155',
     fontWeight: '600',
     lineHeight: 20,
+  },
+  errorText1: {
+    color: '#B91C1C',
+  },
+  errorText2: {
+    color: '#991B1B',
   },
 });
