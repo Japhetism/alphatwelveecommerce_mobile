@@ -80,7 +80,6 @@ export const useCart = () => {
     );
   }, [cartItems]);
 
-  // Calculate shipping as 10% of total price
   const shippingCost = useMemo(() => {
     return subtotal * 0.1;
   }, [subtotal]);
@@ -88,6 +87,12 @@ export const useCart = () => {
   const totalCost = useMemo(() => {
     return subtotal + shippingCost;
   }, [subtotal, shippingCost]);
+
+  const cartItemCount = useMemo(() => {
+    return cartItems.reduce((count, item) => count + item.quantityOrdered, 0);
+  }, [cartItems]);
+
+  const uniqueItemCount = useMemo(() => cartItems.length, [cartItems]);
 
   return {
     cartItems,
@@ -99,5 +104,7 @@ export const useCart = () => {
     subtotal,
     shippingCost,
     totalCost,
+    cartItemCount,
+    uniqueItemCount,
   };
 };

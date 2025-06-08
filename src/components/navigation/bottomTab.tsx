@@ -11,6 +11,7 @@ import CartScreen from '../../screens/cart';
 import FavouritesScreen from '../../screens/favourites';
 import ProductListScreen from '../../screens/products/list';
 import ProfileScreen from '../../screens/profile';
+import { useCart } from '../../context/cart';
 
 const Tab = createBottomTabNavigator();
 
@@ -27,6 +28,8 @@ const IconWithBackground: React.FC<{ active: boolean; children: React.ReactNode 
 );
 
 const BottomTabs = () => {
+  const { uniqueItemCount } = useCart();
+
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
@@ -39,7 +42,14 @@ const BottomTabs = () => {
               icon = <HomeIcon color={focused ? ACTIVE_ICON_COLOR : INACTIVE_ICON_COLOR} size={iconSize} />;
               break;
             case 'Cart':
-              icon = <CartIcon color={focused ? ACTIVE_ICON_COLOR : INACTIVE_ICON_COLOR} size={iconSize} />;
+              icon = (
+                <View>
+                  <CartIcon color={focused ? ACTIVE_ICON_COLOR : INACTIVE_ICON_COLOR} size={iconSize} />
+                  <View style={styles.badge}>
+                    <Text style={styles.badgeText}>{uniqueItemCount}</Text>
+                  </View>
+                </View>
+              );
               break;
             case 'Favourites':
               icon = <HeartIcon color={focused ? ACTIVE_ICON_COLOR : INACTIVE_ICON_COLOR} size={iconSize} />;
@@ -89,6 +99,26 @@ const styles = StyleSheet.create({
     fontWeight: 500,
     lineHeight: 12,
     letterSpacing: 0.5,
+  },
+  badge: {
+    position: 'absolute',
+    top: -10,
+    right: -12,
+    backgroundColor: '#3C4856',
+    borderRadius: 24,
+    minWidth: 24,
+    height: 24,
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: 4,
+    zIndex: 10,
+  },
+  badgeText: {
+    color: '#FFFFFF',
+    fontSize: 10.22,
+    fontWeight: '700',
+    textAlign: 'center',
+    lineHeight: 17.04,
   },
 });
 

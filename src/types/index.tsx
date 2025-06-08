@@ -31,6 +31,8 @@ export type CartContextType = {
   subtotal: number;
   shippingCost: number;
   totalCost: number;
+  cartItemCount: number;
+  uniqueItemCount: number;
   cartItems: CartItem[];
   addToCart: (product: Product, quantity?: number) => void;
   removeFromCart: (productId: string) => void;
