@@ -1,14 +1,11 @@
 import { Image, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import AppLayout from "../../components/layout";
 import { useProductStore } from "../../store/useProductStore";
+import { useCart } from "../../hooks/useCart";
 
 const ProductDetailsScreen = () => {
   const { selectedProduct } = useProductStore();
-
-  const bulletPoints = [
-    "This pre-owned product is not Apple certified, but has been professionally inspected, tested and cleaned by Amazon-qualified suppliers.",
-    "There will be no visible cosmetic imperfections when held at an arm’s length."
-  ];
+  const { addToCart } = useCart();
 
   return (
     <AppLayout>
@@ -30,7 +27,7 @@ const ProductDetailsScreen = () => {
 
           <View style={styles.descriptionContainer}>
             <Text style={styles.bulletText}>About this item</Text>
-            {bulletPoints.map((point, index) => (
+            {selectedProduct?.about?.map((point, index) => (
               <View key={index} style={styles.bulletItem}>
                 <View style={styles.bulletCircle} />
                 <Text style={styles.bulletText}>{point}</Text>
@@ -39,9 +36,11 @@ const ProductDetailsScreen = () => {
           </View>
         </ScrollView>
 
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Add to cart</Text>
-        </TouchableOpacity>
+        {selectedProduct && (
+          <TouchableOpacity style={styles.button} onPress={() => addToCart(selectedProduct, 1)}>
+            <Text style={styles.buttonText}>Add to cart</Text>
+          </TouchableOpacity>
+        )}
       </View>
     </AppLayout>
   );

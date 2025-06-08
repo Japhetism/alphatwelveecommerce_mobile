@@ -2,7 +2,7 @@ import React from 'react';
 import Svg, { Path } from 'react-native-svg';
 import { IconProps } from '../../types';
 
-const HomeIcon: React.FC<IconProps> = ({ color = 'white', size = 24 }) => {
+const HomeIcon: React.FC<IconProps> = ({ color = '#FFFFFF', size = 24 }) => {
   return (
     <Svg
       width={size}
