@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 import CartIcon from '../../assets/icons/cart';
@@ -12,6 +12,7 @@ import FavouritesScreen from '../../screens/favourites';
 import ProductListScreen from '../../screens/products/list';
 import ProfileScreen from '../../screens/profile';
 import { useCart } from '../../context/cart';
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
 const Tab = createBottomTabNavigator();
 
@@ -67,6 +68,15 @@ const BottomTabs = () => {
           <Text style={[styles.label, { color: focused ? ACTIVE_LABEL_COLOR : INACTIVE_LABEL_COLOR }]}>
             {route.name}
           </Text>
+        ),
+         tabBarButton: (props) => (
+          <TouchableOpacity
+            {...props}
+            activeOpacity={0.7}
+            style={[props.style]}
+          >
+            {props.children}
+          </TouchableOpacity>
         ),
         headerShown: false,
         tabBarShowLabel: true,
