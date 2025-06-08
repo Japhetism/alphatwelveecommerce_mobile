@@ -15,10 +15,12 @@ export type Product = {
   about?: Array<string>;
 }
 
-export type ProductStore {
+export type ProductStore = {
+  isLoading: boolean;
   products: Product[];
   selectedProduct: Product | null;
   fetchProducts: () => Promise<void>;
+  setIsLoading: (isLoading: boolean) => void;
   setSelectedProduct: (product: Product) => void;
 }
 
