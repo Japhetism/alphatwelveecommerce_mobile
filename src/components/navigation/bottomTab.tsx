@@ -12,7 +12,6 @@ import FavouritesScreen from '../../screens/favourites';
 import ProductListScreen from '../../screens/products/list';
 import ProfileScreen from '../../screens/profile';
 import { useCart } from '../../context/cart';
-import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
 const Tab = createBottomTabNavigator();
 
@@ -69,7 +68,7 @@ const BottomTabs = () => {
             {route.name}
           </Text>
         ),
-         tabBarButton: (props) => (
+        tabBarButton: (props) => (
           <TouchableOpacity
             {...props}
             activeOpacity={0.7}
@@ -81,11 +80,14 @@ const BottomTabs = () => {
         headerShown: false,
         tabBarShowLabel: true,
         tabBarLabelPosition: 'below-icon',
-        tabBarStyle: {
-          height: 90,
-          paddingBottom: 10,
-          paddingTop: 10,
-        },
+        tabBarStyle:
+          route.name === 'Cart'
+            ? { display: 'none' }
+            : {
+                height: 90,
+                paddingBottom: 10,
+                paddingTop: 10,
+              },
       })}
     >
       <Tab.Screen name="Home" component={ProductListScreen} />
@@ -108,7 +110,7 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 12,
     marginTop: 10,
-    fontWeight: 500,
+    fontWeight: '500',
     lineHeight: 12,
     letterSpacing: 0.5,
   },
